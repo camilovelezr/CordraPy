@@ -19,17 +19,12 @@ def endpoint_url(host, endpoint):
 
 def check_response(response):
     if not response.ok:
-        try:
-            print(response.json())
-        except BaseException:
-            print(response.text)
+        if len(response.content) > 0:
+            print("CordraPy Error Message: "+response.json()["message"])
         response.raise_for_status()
-        return None
-    else:
-        try:
-            return response.json()
-        except BaseException:
-            return response.text
+    
+    return response.content
+
 
 
 def set_auth(username, password):
@@ -104,7 +99,7 @@ class CordraObject:
                         password),
                     headers=set_headers(token),
                     verify=verify))
-            return r
+            return json.loads(r)
         else:  # simple request
             if acls:
                 params['full'] = True
@@ -131,9 +126,9 @@ class CordraObject:
                             password),
                         headers=set_headers(token),
                         verify=verify))
-                return [obj_r,acl_r]
+                return [json.loads(obj_r),json.loads(acl_r)]
             else:
-                return obj_r
+                return json.loads(obj_r)
 
     def read(
         host,
@@ -186,7 +181,7 @@ class CordraObject:
                     password),
                 headers=set_headers(token),
                 verify=verify))
-        return r['payloads']
+        return json.loads(r)['payloads']
 
     def read_payload(
         host,
@@ -347,6 +342,7 @@ class CordraObject:
                 verify=verify))
         return r
 
+
 class Token:
     def create(
         host,
@@ -371,7 +367,7 @@ class Token:
                 params=params,
                 data=auth_json,
                 verify=verify))
-        return r
+        return json.loads(r)
 
     def read(
         host,
@@ -394,7 +390,8 @@ class Token:
                 data=auth_json,
                 verify=verify
             ))
-        return r
+        return json.loads(r)
+
 
     def delete(
         host,
@@ -412,4 +409,5 @@ class Token:
                 data=auth_json,
                 verify=verify
             ))
-        return r
+        return json.loads(r)
+
