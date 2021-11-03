@@ -158,7 +158,7 @@ class CordraObject:
                     password),
                 headers=set_headers(token),
                 verify=verify))
-        return r
+        return json.loads(r)
 
     def read_payload_info(
         host,
@@ -254,7 +254,7 @@ class CordraObject:
                         password),
                     headers=set_headers(token),
                     verify=verify))
-            return r
+            return json.loads(r)
         elif acls: # just update ACLs
             r = check_response(
                 requests.put(
@@ -266,7 +266,7 @@ class CordraObject:
                         password),
                     headers=set_headers(token),
                     verify=verify))
-            return r
+            return json.loads(r)
         else:  # just update object
             if not obj_json:
                 raise Exception('obj_json is required')
@@ -281,7 +281,7 @@ class CordraObject:
                     headers=set_headers(token),
                     verify=verify)
                 )
-            return r
+            return json.loads(r)
 
 
     def delete(
@@ -309,7 +309,7 @@ class CordraObject:
                 headers=set_headers(token),
                 verify=verify)
             )
-        return r
+        return json.loads(r)
 
     def find(
         host,
@@ -340,7 +340,7 @@ class CordraObject:
                     password),
                 headers=set_headers(token),
                 verify=verify))
-        return r
+        return json.loads(r)
 
 
 class Token:
