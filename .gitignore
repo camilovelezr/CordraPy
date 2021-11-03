@@ -19,3 +19,7 @@ upload_package.bash
 
 # All secret stuff
 *secret*
+
+*.DS_Store
+
+.DS_Store
