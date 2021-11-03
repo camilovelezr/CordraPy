@@ -193,7 +193,7 @@ class CordraObject:
                          auth=_set_auth(username, password),
                          headers=_set_headers(token),
                          verify=verify))
-        return r
+        return json.loads(r)
 
     @classmethod
     def read_payload_info(cls,
