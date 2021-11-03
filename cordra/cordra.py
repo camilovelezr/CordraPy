@@ -280,7 +280,7 @@ class CordraObject:
                              auth=_set_auth(username, password),
                              headers=_set_headers(token),
                              verify=verify))
-            return r
+            return json.loads(r)
         elif acls:  # just update ACLs
             r = _check_response(
                 requests.put(_endpoint_url(host, _ACL_ENDPOINT) + obj_id,
@@ -289,7 +289,7 @@ class CordraObject:
                              auth=_set_auth(username, password),
                              headers=_set_headers(token),
                              verify=verify))
-            return r
+            return json.loads(r)
         else:  # just update object
             if not obj_json:
                 raise Exception('obj_json is required')
@@ -300,7 +300,7 @@ class CordraObject:
                              auth=_set_auth(username, password),
                              headers=_set_headers(token),
                              verify=verify))
-            return r
+            return json.loads(r)
 
     @classmethod
     def delete(cls,
@@ -323,7 +323,7 @@ class CordraObject:
                             auth=_set_auth(username, password),
                             headers=_set_headers(token),
                             verify=verify))
-        return r
+        return json.loads(r)
 
     @classmethod
     def find(cls,
@@ -351,7 +351,7 @@ class CordraObject:
                          auth=_set_auth(username, password),
                          headers=_set_headers(token),
                          verify=verify))
-        return r
+        return json.loads(r)
 
 
 class Token:
