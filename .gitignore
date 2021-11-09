@@ -7,7 +7,7 @@
 
 #PyPI dist and build
 dist/
-build/
+/build
 dist-old/
 upload_package.bash
 
